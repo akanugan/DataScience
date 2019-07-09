@@ -51,8 +51,11 @@ class linearRegression1D:
 
     def linearRegression1D_meanSquaredError(self, y_pred):
         self.y_pred = y_pred
+        #print('Y-pred:', y_pred)
         y_res = self.y - self.y_pred
+        #print (y_res)
         mse = np.sum([yi*yi for yi in y_res])/(self.n-2)
+        #print ('mse--->',mse)
         return mse
 
     def LinearRegression1D_standardError(self, mse):
@@ -60,12 +63,15 @@ class linearRegression1D:
             xmean = self.xm
             self.mse = mse
             # mean squared deviation
+            #print ('xmean:', xmean)
             xdevsq = np.sum([ (xi-xmean)**2 for xi in self.x])
+            #print('mdevsq:', xdevsq)
             if xdevsq>0 and self.n > 0:
                 ret = []       
                 for xi in self.x:
                     standardError = np.sqrt( self.mse * ( 1./self.n + (xi-xmean)**2/xdevsq ) )
                     ret.append(standardError)
+                #print ('se:', ret)
                 return ret
             return None
         except Exception as err:
@@ -101,8 +107,8 @@ y_ci_low = [yi-t_crit*yvar for yi, yvar in zip(y_fit, y_fit_var)]
 y_ci_hi  = [yi+t_crit*yvar for yi, yvar in zip(y_fit, y_fit_var)]
 
 # print
-print '\n inputs: ', '\n x: ', x, '\n y: ', y 
-print '\n b0: ', b[0], '\n b1: ', b[1], '\n y_fit: ', y_fit, '\n mse: ', mse, '\n y_fit_var: ', y_fit_var, '\n ndof: ', ndof, '\n t_crit: ', t_crit, '\n y_ci_low: ', y_ci_low,  '\n y_ci_hi: ', y_ci_hi
+print ('\n inputs: ', '\n x: ', x, '\n y: ', y )
+print ('\n b0: ', b[0], '\n b1: ', b[1], '\n y_fit: ', y_fit, '\n mse: ', mse, '\n y_fit_var: ', y_fit_var, '\n ndof: ', ndof, '\n t_crit: ', t_crit, '\n y_ci_low: ', y_ci_low,  '\n y_ci_hi: ', y_ci_hi)
 
 # plot it
 plt.scatter(x,y)
