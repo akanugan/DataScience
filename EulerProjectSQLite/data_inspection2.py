@@ -21,7 +21,8 @@ def main():
     conn = Eu.connection(data_work)
     try:        
         sql = '''
-        SELECT sql FROM sqlite_master
+        SELECT sql 
+        FROM sqlite_master
         WHERE tbl_name = 'bank' AND type = 'table'
         ''' 
         Eu.run(sql,conn)
@@ -39,20 +40,23 @@ def main():
 
 def inspect_marital(conn):
     '''
-    This function examines
-    the variable 'marital'
+    This function examines the variable 'marital'
     '''
     try:
         #A look at the 'marital'
         sql = '''
-        select distinct marital from bank
+        select distinct marital 
+        from bank
         '''
         Eu.run(sql,conn)
                 
         #Order the results by descending order of people
         sql = '''
-        select marital, count(*) n_people from bank
-        group by marital order by n_people desc
+        select marital, 
+        count(*) n_people 
+        from bank
+        group by marital 
+        order by n_people desc
         '''
         Eu.run(sql,conn)
     except Exception as err:
@@ -61,20 +65,23 @@ def inspect_marital(conn):
 
 def inspect_job(conn):
     '''
-    This function examines
-    the variable 'job'
+    This function examines the variable 'job'
     '''
     try:
         #A look at the 'job'
         sql = '''
-        select distinct job from bank
+        select distinct job 
+        from bank
         '''
         Eu.run(sql,conn)
                 
         #Order the results by descending order of people
         sql = '''
-        select job, count(*) n_people from bank
-        group by job order by n_people desc
+        select job, 
+        count(*) n_people 
+        from bank
+        group by job 
+        order by n_people desc
         '''
         Eu.run(sql,conn)
     except Exception as err:

@@ -23,7 +23,6 @@ def main():
     try: 
         #Call data_ingestion to create a working database.
         data_ingestion()
-        
         #Check the column names
         sql = '''
         SELECT sql FROM sqlite_master
@@ -33,21 +32,27 @@ def main():
         
         #A look at the column: 'marital'
         sql = '''
-        select distinct marital from bank
+        select distinct marital 
+        from bank
         '''
         Eu.run(sql,conn)
         
         #Count how many entries for each value of marital
         sql = '''
-        select marital, count(*) n_people from bank
-        group by marital
+        SELECT marital, 
+        COUNT(*) n_people 
+        FROM bank
+        GROUP by marital
         '''
         Eu.run(sql,conn)
         
         #Order the results by descending order of people
         sql = '''
-        select marital,count(*) n_people from bank
-        group by marital order by n_people desc
+        SELECT marital,
+        COUNT(*) n_people 
+        FROM bank
+        GROUP by marital 
+        ORDER by n_people desc
         '''
         Eu.run(sql,conn)
         
@@ -55,7 +60,7 @@ def main():
         Eu.print_error(err)
     finally:
         conn.close()
-
+     
 
 def data_ingestion():
     '''
